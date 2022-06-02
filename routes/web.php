@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get("/about", function () {
     echo "This is about page";
 });
 
-Route::get("/contact", function (\Illuminate\Http\Request $request) {
+Route::get("/contact", function (Request $request) {
     echo $request->query('id');
     echo $request->query("name");
 });
@@ -34,3 +35,24 @@ Route::get("/demo/{id}", function ($id) {
 Route::post("/do-login", function () {
     echo "This is do login handler";
 });
+
+
+//Routing group
+Route::prefix('user')->group(function () {
+    Route::get('/profile', function () {
+        echo "this is profile page";
+    })->name("user.profile");
+    Route::get('/change-profile', function () {
+        echo "this is change profile page";
+    })->name("user.change-profile");
+});
+
+Route::get("/demo-get-name", function () {
+    echo \route("user.profile");
+    echo \route("user.change-profile");
+});
+
+
+
+//user/profile
+//user/change-profile
