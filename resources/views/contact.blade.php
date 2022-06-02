@@ -65,5 +65,7 @@ $myAge = 30;
         {{$k}}: {{$v}}
     </p>
 @endforeach
+
+@includeIf("sub",['test'=>"hihi"])
 </body>
 </html>
