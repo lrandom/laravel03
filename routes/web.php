@@ -23,8 +23,27 @@ Route::get("/about", function () {
 });
 
 Route::get("/contact", function (Request $request) {
-    echo $request->query('id');
-    echo $request->query("name");
+    //load view vào
+    //return view("contact");
+
+    //truyền dữ liệu vào view cách 1
+    /* return view("contact",
+         [
+             "school" => "NIIT",
+             "address" => "Ha Noi"
+         ]);*/
+
+    //truyền dữ liệu vào view cách 3
+    $school = "NIIT";
+    $address = "Ha Noi";
+    $age = 30;
+    $provinces = ["Hà Nội", "Hải Phòng", "Quảng Ninh"];
+    $languages = [
+        "be1" => "PHP",
+        "be2" => "Java",
+        "fe" => "JS"
+    ];
+    return view("contact", compact("school", "address", "age", "provinces","languages"));
 });
 
 //segment
