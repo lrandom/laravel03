@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/about", function () {
+    echo "This is about page";
+});
+
+Route::get("/contact", function (\Illuminate\Http\Request $request) {
+    echo $request->query('id');
+    echo $request->query("name");
+});
+
+//segment
+Route::get("/demo/{id}", function ($id) {
+    echo $id;
+});
+
+Route::post("/do-login", function () {
+    echo "This is do login handler";
+});
