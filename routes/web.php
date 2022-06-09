@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProductController as ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::get("/contact", function (Request $request) {
         "be2" => "Java",
         "fe" => "JS"
     ];
-    return view("contact", compact("school", "address", "age", "provinces","languages"));
+    return view("contact", compact("school", "address", "age", "provinces", "languages"));
 });
 
 //segment
@@ -72,6 +73,15 @@ Route::get("/demo-get-name", function () {
 });
 
 
-
 //user/profile
 //user/change-profile
+
+//7 trở về trước
+/*Route::get("/product/list", 'App\Http\Controllers\ProductController@list');
+Route::get("/product/detail", 'App\Http\Controllers\ProductController@detail');*/
+
+//8 về sau
+Route::get("/product/list", [ProductController::class, 'list']);
+Route::get("/product/detail", [ProductController::class, 'detail']);
+Route::get('/product/add', [ProductController::class, 'addProduct']);
+Route::post('/product/do-add', [ProductController::class, 'doAddProduct'])->name('product.do-add');
