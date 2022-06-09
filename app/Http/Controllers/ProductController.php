@@ -29,6 +29,10 @@ class ProductController extends Controller
                 'name' => 'required', //phải điền
                 'price' => 'required|numeric', //phải điền và phải là số
                 'content' => 'required' //phải điền
+            ],[],[
+                'name'=>'Tên',
+                'price'=>'Giá',
+                'content'=>'Nội dung'
             ]);
             //chạy tiếp đến phần này
             dd($request->all());
