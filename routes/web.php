@@ -86,3 +86,11 @@ Route::get("/product/detail", [ProductController::class, 'detail']);
 Route::get('/product/add', [ProductController::class, 'addProduct']);
 Route::post('/product/add', [ProductController::class, 'addProduct'])->name('product.add');
 //Route::post('/product/do-add', [ProductController::class, 'doAddProduct'])->name('product.do-add');
+
+Route::get('/demo-layout', function () {
+    return view('fe.layout');
+});
+
+Route::get('/blog', function () {
+    return view('fe.blog');
+});

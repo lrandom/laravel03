@@ -38,22 +38,21 @@
 <form method="post" action="{{route('product.add')}}">
     @csrf
     <div>
-        <input type="text" name="name" placeholder="name"/>
+        <input type="text" name="name" placeholder="name" value="{{old('name')}}"/>
         @error('name')
         <p style="color:red;">{{$message}}</p>
         @enderror
     </div>
 
-
     <div>
-        <input type="text" name="price" placeholder="price"/>
+        <input type="text" name="price" placeholder="price" value="{{old('price')}}"/>
         @error('price')
         <p style="color:red">{{$message}}</p>
         @enderror
     </div>
 
     <div>
-        <textarea placeholder="content" name="content"></textarea>
+        <textarea placeholder="content" name="content">{{old('content')}}</textarea>
         @error('content')
         <p style="color:red">{{$message}}</p>
         @enderror
