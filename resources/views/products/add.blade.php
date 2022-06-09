@@ -8,11 +8,56 @@
     <title>Document</title>
 </head>
 <body>
-<form method="post" action="{{route('product.do-add')}}">
+{{--@if($errors->any())
+    @foreach($errors->all() as $err)
+        <p>{{$err}}</p>
+    @endforeach
+@endif--}}
+
+
+{{--<form method="post" action="{{route('product.add')}}">
     @csrf
-    <input type="text" name="name" placeholder="name"/>
-    <input type="text" name="price" placeholder="price"/>
-    <textarea placeholder="content" name="content"></textarea>
+    <div>
+        <input type="text" name="name" placeholder="name"/>
+        <p style="color:red">{{$errors->first('name')}}</p>
+    </div>
+
+
+    <div>
+        <input type="text" name="price" placeholder="price"/>
+        <p style="color:red">{{$errors->first('price')}}</p>
+    </div>
+
+    <div>
+        <textarea placeholder="content" name="content"></textarea>
+        <p style="color:red">{{$errors->first('content')}}</p>
+    </div>
+    <button>Submit</button>
+</form>--}}
+
+<form method="post" action="{{route('product.add')}}">
+    @csrf
+    <div>
+        <input type="text" name="name" placeholder="name"/>
+        @error('name')
+        <p style="color:red;">{{$message}}</p>
+        @enderror
+    </div>
+
+
+    <div>
+        <input type="text" name="price" placeholder="price"/>
+        @error('price')
+        <p style="color:red">{{$message}}</p>
+        @enderror
+    </div>
+
+    <div>
+        <textarea placeholder="content" name="content"></textarea>
+        @error('content')
+        <p style="color:red">{{$message}}</p>
+        @enderror
+    </div>
     <button>Submit</button>
 </form>
 </body>

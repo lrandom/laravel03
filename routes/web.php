@@ -84,4 +84,5 @@ Route::get("/product/detail", 'App\Http\Controllers\ProductController@detail');*
 Route::get("/product/list", [ProductController::class, 'list']);
 Route::get("/product/detail", [ProductController::class, 'detail']);
 Route::get('/product/add', [ProductController::class, 'addProduct']);
-Route::post('/product/do-add', [ProductController::class, 'doAddProduct'])->name('product.do-add');
+Route::post('/product/add', [ProductController::class, 'addProduct'])->name('product.add');
+//Route::post('/product/do-add', [ProductController::class, 'doAddProduct'])->name('product.do-add');

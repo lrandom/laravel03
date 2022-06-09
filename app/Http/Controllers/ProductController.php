@@ -21,17 +21,30 @@ class ProductController extends Controller
         return view('products.detail', compact('id', 'allData'));
     }
 
-    public function addProduct()
+    public function addProduct(Request $request)
     {
+        if ($request->isMethod('POST')) {
+            //validate
+            $request->validate([
+                'name' => 'required', //phải điền
+                'price' => 'required|numeric', //phải điền và phải là số
+                'content' => 'required' //phải điền
+            ]);
+            //chạy tiếp đến phần này
+            dd($request->all());
+        }
         return view('products.add');
     }
 
-    public function doAddProduct(Request $request)
-    {
-        $name = $request->input('name');
-        $price = $request->input('price');
-        $content = $request->input('content');
-        $allData = $request->all();
-        return view('products.add_result', compact('name', 'price', 'content','allData'));
-    }
+    /*    public function doAddProduct(Request $request)
+        {
+            //if ($request->has('name')) {
+            $name = $request->input('name') ?? null;
+            //}
+
+            $price = $request->input('price');
+            $content = $request->input('content');
+            $allData = $request->all();
+            return view('products.add_result', compact('name', 'price', 'content', 'allData'));
+        }*/
 }
