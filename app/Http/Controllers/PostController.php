@@ -34,11 +34,12 @@ class PostController extends Controller
         /*  $post = Post::find(14);
           $post->title = "Xin chao Viet Nam";
           $post->save();*/
-/*
-        Post::where('id', 14)->update([
-            'title' => 'Hello VietNam'
-        ]);*/
+        /*
+                Post::where('id', 14)->update([
+                    'title' => 'Hello VietNam'
+                ]);*/
 
-        Post::where('id', 14)->delete();
+        //Post::where('id', 12)->delete();
+        Post::where('id', 12)->restore();
     }
 }
