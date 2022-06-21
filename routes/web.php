@@ -98,3 +98,6 @@ Route::get('/blog', function () {
 Route::get('/admin/category', [\App\Http\Controllers\Admin\CategoryController::class, 'getCategories']);
 Route::get('/admin/category/insert', [\App\Http\Controllers\Admin\CategoryController::class, 'insert',
 ]);
+
+Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index',
+]);
