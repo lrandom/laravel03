@@ -94,3 +94,7 @@ Route::get('/demo-layout', function () {
 Route::get('/blog', function () {
     return view('fe.blog');
 });
+
+Route::get('/admin/category', [\App\Http\Controllers\Admin\CategoryController::class, 'getCategories']);
+Route::get('/admin/category/insert', [\App\Http\Controllers\Admin\CategoryController::class, 'insert',
+]);

@@ -8,4 +8,5 @@ class HomeController extends Controller
     {
         echo "This is contact page";
     }
+
 }
