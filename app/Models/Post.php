@@ -19,8 +19,19 @@ class Post extends Model
         'category_id'
     ];
 
+    public function types()
+    {
+        return $this->morphToMany(Type::class,'typepivotable');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+
+    public function images()
+    {
+        return $this->morphMany(Image::class,'imageable');
     }
 }

@@ -133,5 +133,32 @@ Route::get('one-many-reverse', function () {
 Route::get('many-to-many', function () {
     $types = \App\Models\Type::all();
     $products = \App\Models\Product::all();//điều hoà
-    return view('fe.relationship.many-to-many', compact('types','products'));
+    return view('fe.relationship.many-to-many', compact('types', 'products'));
+});
+
+Route::get('/get-model', function () {
+    echo \App\Models\Product::class;
+});
+
+Route::get('/morph-one', function () {
+    $products = \App\Models\Product::all();
+    $posts = \App\Models\Post::all();
+    return view('fe.relationship.morph-one', compact('products', 'posts'));
+});
+
+Route::get('/morph-many', function () {
+    $products = \App\Models\Product::all();
+    $posts = \App\Models\Post::all();
+    return view('fe.relationship.morph-many', compact('products', 'posts'));
+});
+
+Route::get('/morph-many-many', function () {
+    $type = \App\Models\Type::find(1);
+
+//    dd(
+//        $type->products
+//    );
+
+    $type =\App\Models\Type::find(5);
+    dd($type->posts);
 });

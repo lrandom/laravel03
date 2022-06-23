@@ -9,9 +9,20 @@ class Type extends Model
 {
     use HasFactory;
 
+//    public function products()
+//    {
+//        return $this->belongsToMany(Product::class, "type_products",
+//            "type_id", "product_id");
+//    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class, "type_products",
-            "type_id", "product_id");
+        return $this->morphedByMany(Product::class,
+            'typepivotable','type_pivots');
+    }
+
+    public function posts()
+    {
+        return $this->morphedByMany(Post::class, 'typepivotable','type_pivots');
     }
 }
