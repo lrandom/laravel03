@@ -101,3 +101,31 @@ Route::get('/admin/category/insert', [\App\Http\Controllers\Admin\CategoryContro
 
 Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index',
 ]);
+
+Route::get('/demo-paginate', [\App\Http\Controllers\HomeController::class, 'pagination',
+]);
+
+Route::get('/one-one', function () {
+    /*$user = \App\Models\User::find(1);
+    echo $user->id;
+    echo $user->name;
+    echo $user->userInfo->phone;
+    echo $user->userInfo->address;*/
+
+    /*   $userInfo = \App\Models\UserInfo::find(2);
+       echo $userInfo->id;
+       echo $userInfo->name;
+       echo $userInfo->user->email;
+       echo $userInfo->user->name;*/
+});
+
+
+Route::get('one-many', function () {
+    $categories = \App\Models\Category::all();
+    return view('fe.relationship.one-to-many',compact('categories'));
+});
+
+Route::get('one-many-reverse', function () {
+    $post = \App\Models\Post::find(3);
+    echo $post->category->name;
+});

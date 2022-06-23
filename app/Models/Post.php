@@ -18,4 +18,9 @@ class Post extends Model
         'views',
         'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

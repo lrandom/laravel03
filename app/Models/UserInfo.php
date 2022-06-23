@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class UserInfo extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
-
-    public function posts()
+    public function user()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(User::class);
     }
 }
