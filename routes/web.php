@@ -122,10 +122,16 @@ Route::get('/one-one', function () {
 
 Route::get('one-many', function () {
     $categories = \App\Models\Category::all();
-    return view('fe.relationship.one-to-many',compact('categories'));
+    return view('fe.relationship.one-to-many', compact('categories'));
 });
 
 Route::get('one-many-reverse', function () {
     $post = \App\Models\Post::find(3);
     echo $post->category->name;
+});
+
+Route::get('many-to-many', function () {
+    $types = \App\Models\Type::all();
+    $products = \App\Models\Product::all();//điều hoà
+    return view('fe.relationship.many-to-many', compact('types','products'));
 });

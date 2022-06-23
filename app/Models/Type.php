@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Type extends Model
 {
     use HasFactory;
 
-    public function types()
+    public function products()
     {
-        return $this->belongsToMany(Type::class, "type_products",
-            "product_id", "type_id");
+        return $this->belongsToMany(Product::class, "type_products",
+            "type_id", "product_id");
     }
 }
