@@ -171,3 +171,20 @@ Route::get('upload-form', [\App\Http\Controllers\HomeController::class, 'uploadF
 
 Route::post('demo-upload', [\App\Http\Controllers\HomeController::class, 'demoUpload',
 ])->name('demo-upload');
+
+Route::get('gallery', function () {
+    $photos = \App\Models\Photo::all();
+    return view('fe.gallery', compact('photos'));
+});
+
+Route::post('upload-img', function (Request $request) {
+    if ($request->has('img') && $request->file('img')) {
+        $file = $request->file('img');
+        $fileName = time() . '-photo' . $file->getClientOriginalName();
+        $file->storeAs('/gallery', $fileName, 'public');
+        $photo = new \App\Models\Photo();
+        $photo->path = 'storage/gallery/' . $fileName;
+        $photo->save();
+    }
+    return redirect()->back();
+})->name('upload-img');
