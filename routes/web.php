@@ -159,6 +159,15 @@ Route::get('/morph-many-many', function () {
 //        $type->products
 //    );
 
-    $type =\App\Models\Type::find(5);
+    $type = \App\Models\Type::find(5);
     dd($type->posts);
 });
+
+Route::get('demo-collection', [\App\Http\Controllers\HomeController::class, 'demoCollection',
+]);
+
+Route::get('upload-form', [\App\Http\Controllers\HomeController::class, 'uploadForm',
+]);
+
+Route::post('demo-upload', [\App\Http\Controllers\HomeController::class, 'demoUpload',
+])->name('demo-upload');

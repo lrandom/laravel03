@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         //Paginator::useBootstrap();
+        \Illuminate\Support\Collection::macro('convert', function () {
+            return $this->map(function ($item) {
+                return $item * 2;
+            });
+        });
     }
 }

@@ -53,3 +53,22 @@ $response = tap($kernel->handle(
 ))->send();
 
 $kernel->terminate($request, $response);
+
+//higher order function
+//cái mà được dùng làm tham số thì callback function
+//được sử dụng để chèn code
+// vào higher order function khi thực thi higher order function
+//closures
+/*$name = "10";
+$age = 20;
+function a($func)
+{
+    $total = 10+20;
+    $func($total);
+}
+
+//hàm nặc danh
+a(function ($total) use ($name,$age){
+    echo $name;
+    echo $age;
+});*/
