@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Controllers\ProductController as ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,172 +17,51 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/about", function () {
-    echo "This is about page";
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get("/contact", function (Request $request) {
-    //load view vào
-    //return view("contact");
+Route::get('/profile', function () {
+    return view('fe.my-profile');
+})->middleware(['auth'])->name('profile');
 
-    //truyền dữ liệu vào view cách 1
-    /* return view("contact",
-         [
-             "school" => "NIIT",
-             "address" => "Ha Noi"
-         ]);*/
+Route::get('my-login', function () {
+    return view('fe.login');
+})->name('my-login');
 
-    //truyền dữ liệu vào view cách 3
-    $school = "NIIT";
-    $address = "Ha Noi";
-    $age = 30;
-    $provinces = ["Hà Nội", "Hải Phòng", "Quảng Ninh"];
-    $languages = [
-        "be1" => "PHP",
-        "be2" => "Java",
-        "fe" => "JS"
+Route::get('do-logout', function () {
+    \Illuminate\Support\Facades\Auth::logout();
+    return redirect()->route('my-login');
+})->name('do-logout');
+
+Route::post('/do-login', function (\Illuminate\Http\Request $request) {
+    $attemptData = [
+        'email' => $request->input('email'),
+        'password' => $request->input('password')
     ];
-    return view("contact", compact("school", "address", "age", "provinces", "languages"));
-});
-
-//segment
-Route::get("/demo/{id}", function ($id) {
-    echo $id;
-});
-
-Route::post("/do-login", function () {
-    echo "This is do login handler";
-});
-
-
-//Routing group
-Route::prefix('user')->group(function () {
-    Route::get('/profile', function () {
-        echo "this is profile page";
-    })->name("user.profile");
-    Route::get('/change-profile', function () {
-        echo "this is change profile page";
-    })->name("user.change-profile");
-});
-
-Route::get("/demo-get-name", function () {
-    echo \route("user.profile");
-    echo \route("user.change-profile");
-});
-
-
-//user/profile
-//user/change-profile
-
-//7 trở về trước
-/*Route::get("/product/list", 'App\Http\Controllers\ProductController@list');
-Route::get("/product/detail", 'App\Http\Controllers\ProductController@detail');*/
-
-//8 về sau
-Route::get("/product/list", [ProductController::class, 'list']);
-Route::get("/product/detail", [ProductController::class, 'detail']);
-Route::get('/product/add', [ProductController::class, 'addProduct']);
-Route::post('/product/add', [ProductController::class, 'addProduct'])->name('product.add');
-//Route::post('/product/do-add', [ProductController::class, 'doAddProduct'])->name('product.do-add');
-
-Route::get('/demo-layout', function () {
-    return view('fe.layout');
-});
-
-Route::get('/blog', function () {
-    return view('fe.blog');
-});
-
-Route::get('/admin/category', [\App\Http\Controllers\Admin\CategoryController::class, 'getCategories']);
-Route::get('/admin/category/insert', [\App\Http\Controllers\Admin\CategoryController::class, 'insert',
-]);
-
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index',
-]);
-
-Route::get('/demo-paginate', [\App\Http\Controllers\HomeController::class, 'pagination',
-]);
-
-Route::get('/one-one', function () {
-    /*$user = \App\Models\User::find(1);
-    echo $user->id;
-    echo $user->name;
-    echo $user->userInfo->phone;
-    echo $user->userInfo->address;*/
-
-    /*   $userInfo = \App\Models\UserInfo::find(2);
-       echo $userInfo->id;
-       echo $userInfo->name;
-       echo $userInfo->user->email;
-       echo $userInfo->user->name;*/
-});
-
-
-Route::get('one-many', function () {
-    $categories = \App\Models\Category::all();
-    return view('fe.relationship.one-to-many', compact('categories'));
-});
-
-Route::get('one-many-reverse', function () {
-    $post = \App\Models\Post::find(3);
-    echo $post->category->name;
-});
-
-Route::get('many-to-many', function () {
-    $types = \App\Models\Type::all();
-    $products = \App\Models\Product::all();//điều hoà
-    return view('fe.relationship.many-to-many', compact('types', 'products'));
-});
-
-Route::get('/get-model', function () {
-    echo \App\Models\Product::class;
-});
-
-Route::get('/morph-one', function () {
-    $products = \App\Models\Product::all();
-    $posts = \App\Models\Post::all();
-    return view('fe.relationship.morph-one', compact('products', 'posts'));
-});
-
-Route::get('/morph-many', function () {
-    $products = \App\Models\Product::all();
-    $posts = \App\Models\Post::all();
-    return view('fe.relationship.morph-many', compact('products', 'posts'));
-});
-
-Route::get('/morph-many-many', function () {
-    $type = \App\Models\Type::find(1);
-
-//    dd(
-//        $type->products
-//    );
-
-    $type = \App\Models\Type::find(5);
-    dd($type->posts);
-});
-
-Route::get('demo-collection', [\App\Http\Controllers\HomeController::class, 'demoCollection',
-]);
-
-Route::get('upload-form', [\App\Http\Controllers\HomeController::class, 'uploadForm',
-]);
-
-Route::post('demo-upload', [\App\Http\Controllers\HomeController::class, 'demoUpload',
-])->name('demo-upload');
-
-Route::get('gallery', function () {
-    $photos = \App\Models\Photo::all();
-    return view('fe.gallery', compact('photos'));
-});
-
-Route::post('upload-img', function (Request $request) {
-    if ($request->has('img') && $request->file('img')) {
-        $file = $request->file('img');
-        $fileName = time() . '-photo' . $file->getClientOriginalName();
-        $file->storeAs('/gallery', $fileName, 'public');
-        $photo = new \App\Models\Photo();
-        $photo->path = 'storage/gallery/' . $fileName;
-        $photo->save();
+    if (\Illuminate\Support\Facades\Auth::attempt($attemptData)) {
+        //thông tin đăng nhập chính xác
+        $request->session()->regenerate();
+        return redirect()->route('profile');
+    } else {
+        return redirect(\route('my-login'));
     }
-    return redirect()->back();
-})->name('upload-img');
+})->name('do-login');
+
+Route::get('/admin-area', function () {
+    echo 'admin area';
+})->name('admin-area')->middleware(\App\Http\Middleware\CheckAdminLevel::class);
+
+Route::get('/staff-area', function () {
+    echo 'staff area';
+})->name('staff-area')->middleware(\App\Http\Middleware\CheckStaffLevel::class);
+
+Route::get('/user-area', function () {
+    echo 'user area';
+})->name('user-area')->middleware('auth');
+
+Route::get('/restrict-notice', function () {
+    echo 'You are not allowed to access this page';
+})->name('restrict-notice');
+
+require __DIR__ . '/auth.php';
