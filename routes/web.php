@@ -64,4 +64,35 @@ Route::get('/restrict-notice', function () {
     echo 'You are not allowed to access this page';
 })->name('restrict-notice');
 
+Route::get('/set-session', function (\Illuminate\Http\Request $request) {
+    $request->session()->put('school_name', 'NIIT');
+    session(['class_name' => 'laravel 03']);
+});
+
+Route::get('/get-session', function (\Illuminate\Http\Request $request) {
+    echo $request->session()->get('school_name');
+    echo session('class_name');
+});
+
+Route::get('/all-session', function (\Illuminate\Http\Request $request) {
+    dd($request->session()->all());
+});
+
+Route::get('/remove-session', function (\Illuminate\Http\Request $request) {
+    $request->session()->forget('school_name');
+    //$request->session()->flush();
+});
+
+Route::get('/remove-once-session', function (\Illuminate\Http\Request $request) {
+    echo $request->session()->pull('class_name');
+});
+
+Route::get('/list-product', function () {
+     return view('fe.list-product');
+})->name('list-product');
+
+Route::get('/add-product', function () {
+   //add database xong rồi
+    return redirect(\route('list-product'))->with('success', 'Add product success');
+});
 require __DIR__ . '/auth.php';
