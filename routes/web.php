@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -65,7 +65,7 @@ Route::get('/restrict-notice', function () {
 })->name('restrict-notice');
 
 Route::get('/set-session', function (\Illuminate\Http\Request $request) {
-    $request->session()->put('school_name', 'NIIT');
+    $request->session()->put('school_name',['name'=>'Luan']);
     session(['class_name' => 'laravel 03']);
 });
 
@@ -88,11 +88,14 @@ Route::get('/remove-once-session', function (\Illuminate\Http\Request $request) 
 });
 
 Route::get('/list-product', function () {
-     return view('fe.list-product');
+    return view('fe.list-product');
 })->name('list-product');
 
 Route::get('/add-product', function () {
-   //add database xong rồi
+    //add database xong rồi
     return redirect(\route('list-product'))->with('success', 'Add product success');
 });
+
+
+require __DIR__ . '/cart.php';
 require __DIR__ . '/auth.php';
