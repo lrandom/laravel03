@@ -1,4 +1,4 @@
-got/*
+/*
  Navicat Premium Data Transfer
 
  Source Server         : localhost
@@ -11,7 +11,7 @@ got/*
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 23/06/2022 21:57:21
+ Date: 12/07/2022 21:37:28
 */
 
 SET NAMES utf8mb4;
@@ -127,7 +127,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -149,6 +149,8 @@ INSERT INTO `migrations` VALUES (20, '2022_06_23_131948_create_type_products_tab
 INSERT INTO `migrations` VALUES (22, '2022_06_23_140635_create_images_table', 7);
 INSERT INTO `migrations` VALUES (23, '2022_06_23_143525_create_type_pivots_table', 8);
 INSERT INTO `migrations` VALUES (24, '2022_06_23_144501_alter_type_pivots_add_type_id', 9);
+INSERT INTO `migrations` VALUES (25, '2022_06_30_132404_create_photos_table', 10);
+INSERT INTO `migrations` VALUES (26, '2022_07_07_131828_alter_users_add_level_column', 11);
 COMMIT;
 
 -- ----------------------------
@@ -191,6 +193,29 @@ CREATE TABLE `personal_access_tokens` (
 -- Records of personal_access_tokens
 -- ----------------------------
 BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for photos
+-- ----------------------------
+DROP TABLE IF EXISTS `photos`;
+CREATE TABLE `photos` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of photos
+-- ----------------------------
+BEGIN;
+INSERT INTO `photos` VALUES (1, 'storage/gallery/1656596065-photoCanh-Ga-Ran-KFC1.png', '2022-06-30 13:34:26', '2022-06-30 13:34:26');
+INSERT INTO `photos` VALUES (2, 'storage/gallery/1656596236-photocharacter_boy 1.png', '2022-06-30 13:37:16', '2022-06-30 13:37:16');
+INSERT INTO `photos` VALUES (3, 'storage/gallery/1656596250-photoLrandom.png', '2022-06-30 13:37:30', '2022-06-30 13:37:30');
+INSERT INTO `photos` VALUES (4, 'storage/gallery/1656596295-photo320x50.png', '2022-06-30 13:38:15', '2022-06-30 13:38:15');
+INSERT INTO `photos` VALUES (5, 'storage/gallery/1656596302-photoLrandom.png', '2022-06-30 13:38:22', '2022-06-30 13:38:22');
 COMMIT;
 
 -- ----------------------------
@@ -362,6 +387,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `level` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -370,16 +396,16 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES (1, 'lrandom0', 'lrandom@gmail.com0', NULL, '$2y$10$8CIqXA/NL5Q0bVaN5wc8EO8JQ9l1xEe3NW7rlIKdfwsUbZFmexGse', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (2, 'lrandom1', 'lrandom@gmail.com1', NULL, '$2y$10$hwPp8st1RKkF/pAFOEErA.JJS5yME02Jsowikn8cHs0SICG7dml7S', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (3, 'lrandom2', 'lrandom@gmail.com2', NULL, '$2y$10$lUPUBLP/Nl8oPl/TxFbNvuQ8EzE/z7hsA8quTRoZUCos.OKsopAJi', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (4, 'lrandom3', 'lrandom@gmail.com3', NULL, '$2y$10$diFIUNd8/WpqsgbpbyBc8OS3jLRnKr1JBwUAukCd.DyzXRcRDD2.S', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (5, 'lrandom4', 'lrandom@gmail.com4', NULL, '$2y$10$k4Li3yzs82tWlMfH0awX4.LadrHi8QBvCVXYpSKmVdgXuHtjdICQS', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (6, 'lrandom5', 'lrandom@gmail.com5', NULL, '$2y$10$K1I83J2k02d1dOSOKVGI0eofAb7KAO6jGMTxgozwNKQfAxT6tbsqS', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (7, 'lrandom6', 'lrandom@gmail.com6', NULL, '$2y$10$q/RaEqnx9OmpuWkywF0aMeqNLzesEv58uiu9gZyCgrJ4UFQ5jexMG', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (8, 'lrandom7', 'lrandom@gmail.com7', NULL, '$2y$10$dkGNu.le5FCZdHSkw5v9uOOpZ9brv3B1gBWWzMeqxiFsz3pvrdvoW', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (9, 'lrandom8', 'lrandom@gmail.com8', NULL, '$2y$10$bXGQVXMCgNYIgYUKtEVOIuzYIJjZMTZmI7lvFk7i/qt2hQ0HJN0vO', NULL, NULL, NULL);
-INSERT INTO `users` VALUES (10, 'lrandom9', 'lrandom@gmail.com9', NULL, '$2y$10$Ja5G5cePZkO35bC79ztM6uCxHorzMER41104H06JLfAomKWEruA7.', NULL, NULL, NULL);
+INSERT INTO `users` VALUES (1, 'user', 'lrandom@gmail.com0', NULL, '$2y$10$8CIqXA/NL5Q0bVaN5wc8EO8JQ9l1xEe3NW7rlIKdfwsUbZFmexGse', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (2, 'staff', 'lrandom@gmail.com1', NULL, '$2y$10$hwPp8st1RKkF/pAFOEErA.JJS5yME02Jsowikn8cHs0SICG7dml7S', NULL, NULL, NULL, 2);
+INSERT INTO `users` VALUES (3, 'admin', 'lrandom@gmail.com2', NULL, '$2y$10$lUPUBLP/Nl8oPl/TxFbNvuQ8EzE/z7hsA8quTRoZUCos.OKsopAJi', NULL, NULL, NULL, 3);
+INSERT INTO `users` VALUES (4, 'lrandom3', 'lrandom@gmail.com3', NULL, '$2y$10$diFIUNd8/WpqsgbpbyBc8OS3jLRnKr1JBwUAukCd.DyzXRcRDD2.S', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (5, 'lrandom4', 'lrandom@gmail.com4', NULL, '$2y$10$k4Li3yzs82tWlMfH0awX4.LadrHi8QBvCVXYpSKmVdgXuHtjdICQS', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (6, 'lrandom5', 'lrandom@gmail.com5', NULL, '$2y$10$K1I83J2k02d1dOSOKVGI0eofAb7KAO6jGMTxgozwNKQfAxT6tbsqS', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (7, 'lrandom6', 'lrandom@gmail.com6', NULL, '$2y$10$q/RaEqnx9OmpuWkywF0aMeqNLzesEv58uiu9gZyCgrJ4UFQ5jexMG', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (8, 'lrandom7', 'lrandom@gmail.com7', NULL, '$2y$10$dkGNu.le5FCZdHSkw5v9uOOpZ9brv3B1gBWWzMeqxiFsz3pvrdvoW', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (9, 'lrandom8', 'lrandom@gmail.com8', NULL, '$2y$10$bXGQVXMCgNYIgYUKtEVOIuzYIJjZMTZmI7lvFk7i/qt2hQ0HJN0vO', NULL, NULL, NULL, 1);
+INSERT INTO `users` VALUES (10, 'lrandom9', 'lrandom@gmail.com9', NULL, '$2y$10$Ja5G5cePZkO35bC79ztM6uCxHorzMER41104H06JLfAomKWEruA7.', NULL, NULL, NULL, 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
