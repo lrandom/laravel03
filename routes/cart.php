@@ -77,7 +77,6 @@ Route::get('/delete-cart-item/{id}', function ($id, \Illuminate\Http\Request $re
 
 Route::get('change-quantity/{id}/{step}', function ($id, $step) {
     $cart = session('cart');
-    //dd($id);
     if ($cart && is_numeric($step)) {
         for ($i = 0; $i < count($cart); $i++) {
             if ($cart[$i]['item']->id == $id) {
@@ -85,8 +84,9 @@ Route::get('change-quantity/{id}/{step}', function ($id, $step) {
                     break;
                 }
                 $cart[$i]['item_quantity'] += $step;
+                break;
             }
-            break;
+
         }
     }
     session(['cart' => $cart]);
