@@ -65,7 +65,7 @@ Route::get('/restrict-notice', function () {
 })->name('restrict-notice');
 
 Route::get('/set-session', function (\Illuminate\Http\Request $request) {
-    $request->session()->put('school_name',['name'=>'Luan']);
+    $request->session()->put('school_name', ['name' => 'Luan']);
     session(['class_name' => 'laravel 03']);
 });
 
@@ -96,6 +96,13 @@ Route::get('/add-product', function () {
     return redirect(\route('list-product'))->with('success', 'Add product success');
 });
 
+Route::get('/send-mail', function () {
+   /* \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
+        ->send(new \App\Mail\OrderState());*/
+/*    \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
+        ->send(new \App\Mail\BirthDay());*/
+    dispatch(new \App\Jobs\SendEmail());
+});
 
 require __DIR__ . '/cart.php';
 require __DIR__ . '/auth.php';
