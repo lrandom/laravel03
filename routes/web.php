@@ -97,12 +97,18 @@ Route::get('/add-product', function () {
 });
 
 Route::get('/send-mail', function () {
-   /* \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
-        ->send(new \App\Mail\OrderState());*/
-/*    \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
-        ->send(new \App\Mail\BirthDay());*/
+    /* \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
+         ->send(new \App\Mail\OrderState());*/
+    /*    \Illuminate\Support\Facades\Mail::to('beginlive@gmail.com')
+            ->send(new \App\Mail\BirthDay());*/
     dispatch(new \App\Jobs\SendEmail());
 });
 
 require __DIR__ . '/cart.php';
 require __DIR__ . '/auth.php';
+
+Route::get('language', function (\Illuminate\Http\Request $request) {
+    $lang = $request->get('lang') ?? 'en';
+    \Illuminate\Support\Facades\App::setLocale($lang);
+    return view('language');
+});
